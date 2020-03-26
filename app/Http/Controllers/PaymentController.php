@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Razorpay\Api\Api;
 use Illuminate\Http\Request;
 use App\Order;
 use Mail;
+// require('razorpay-php/Razorpay.php');
 
 class PaymentController extends Controller
 {
@@ -50,4 +52,81 @@ class PaymentController extends Controller
         }
         // return $input;
     }
+
+    public function paymentStart (Request $request) {
+
+        $input = $request->all();
+
+
+        $name = $input['fname'] . " " . $input['lname'];
+        $email = $input['email'];
+        $mobile = $input['mobile'];
+        $pancard = $input['pancard'];
+        $country = $input['country'];
+        $amount = $input['amount'];
+
+        $keyId = 'rzp_test_N2JukPxHUXBj3n';
+        $keySecret = '1jgiGhOZOMzBxJuBQ8uxUXPh';
+        $displayCurrency = 'INR';
+        // Create the Razorpay Order
+
+
+        $api = new Api($keyId, $keySecret);
+
+        $orderData = [
+            'receipt'         => 3456,
+            'amount'          => $amount * 100, // 2000 rupees in paise
+            'currency'        => 'INR',
+            'payment_capture' => 1 // auto capture
+        ];
+
+        $razorpayOrder = $api->order->create($orderData);
+
+        $razorpayOrderId = $razorpayOrder['id'];
+
+        $_SESSION['razorpay_order_id'] = $razorpayOrderId;
+
+        $displayAmount = $amount = $orderData['amount'];
+
+        if ($displayCurrency !== 'INR')
+        {
+            $url = "https://api.fixer.io/latest?symbols=$displayCurrency&base=INR";
+            $exchange = json_decode(file_get_contents($url), true);
+
+            $displayAmount = $exchange['rates'][$displayCurrency] * $amount / 100;
+        }
+
+        $data = [
+            "key"               => $keyId,
+            "amount"            => $amount,
+            "name"              => $name,
+            "description"       => "Donation for Corona",
+            "image"             => "https://img.etimg.com/thumb/msid-65041692,width-300,imgsize-64464,resizemode-4/razorpay.jpg",
+            "prefill"           => [
+            "name"              => $name,
+            "email"             => $email,
+            "contact"           => $mobile,
+            ],
+            "notes"             => [
+            "address"           => "Hello World",
+            "merchant_order_id" => "12312321",
+            ],
+            "theme"             => [
+            "color"             => "#F37254"
+            ],
+            "order_id"          => $razorpayOrderId,
+        ];
+
+        if ($displayCurrency !== 'INR')
+        {
+            $data['display_currency']  = $displayCurrency;
+            $data['display_amount']    = $displayAmount;
+        }
+
+        $json = json_encode($data);
+
+        return $json;
+
+    }
+
 }

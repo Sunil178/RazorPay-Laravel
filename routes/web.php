@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::post('/proceed', 'PaymentController@payment');
+Route::post('/payment_start', 'PaymentController@paymentStart');
