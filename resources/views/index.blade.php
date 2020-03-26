@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 <!doctype html>
 
->>>>>>> 56540a3c33a85f3a694f193807f5eae9f5f366ac
 <html>
 
 <head>
@@ -60,14 +57,8 @@
                     </div>
                     <div>
                         <img src="assets/donate_header.svg" height="30px">
-<<<<<<< HEAD
-                        <form id="donate_form" method="POST" action="/proceed/">
-
-                            {{csrf_field()}}
-=======
                         <form id="donate_form">
 
->>>>>>> 56540a3c33a85f3a694f193807f5eae9f5f366ac
                             <p>
                             <i class="fa fa-info-circle">&nbsp;<em><span style="color: #666666;">Only available to donors from India. Foreign contributions are not permitted.</span>
                                 </em></i></p>
@@ -96,11 +87,7 @@
                             <label>AMOUNT</label>
                             <div class="bene_form">
                                 <input type="text" id="amount" name="amount" value="" placeholder="Enter Amount">
-<<<<<<< HEAD
-                                <input class="inputbutton" type="submit"  id="rzp-button1"  value="DONATE NOW">
-=======
                                 <input class="inputbutton" name="donate" type="submit"  id="rzp-button1"  value="DONATE NOW">
->>>>>>> 56540a3c33a85f3a694f193807f5eae9f5f366ac
 
                             </div>
                         </form>
