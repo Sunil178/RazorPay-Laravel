@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Order;
+use Mail;
 
 class PaymentController extends Controller
 {
     public function payment(Request $request) {
+        // dd($request->all());
         $transaction_id = "coronavirus-benefactory".time();
         $input = $request->all();
         $data = new Order();
@@ -29,11 +31,11 @@ class PaymentController extends Controller
         $name = $input["fname"];
         $message_data = ["message" => $message, "email"=>$input["email"], "amount"=>$amount, "name"=> $name] ;
         // dd($message_data["amount"]);
-        // Mail::send('corona_thank_you', ['title' => $title, 'message_data' => $message_data], function ($message) use($message_data)
-        // {
-        //     $message->from('support@benefactory.in', 'Team Benefactory');
-        //     $message->to($message_data['email'])->subject('#MaskAgainstCovid19 Donation');
-        // });
+        Mail::send('corona_thank_you', ['title' => $title, 'message_data' => $message_data], function ($message) use($message_data)
+        {
+            $message->from('dipakrathod258@gmail.com', 'Team Benefactory');
+            $message->to($message_data['email'])->subject('#MaskAgainstCovid19 Donation');
+        });
         // return redirect('/')->with("status", "success");
         if ($data->save()) {
             $response["status"]="success";
