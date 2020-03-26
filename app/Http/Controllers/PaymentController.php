@@ -53,7 +53,6 @@ class PaymentController extends Controller
         // return $input;
     }
 
-
     public function paymentStart (Request $request) {
 
         $input = $request->all();
@@ -129,7 +128,5 @@ class PaymentController extends Controller
         return $json;
 
     }
-
-
 
 }
