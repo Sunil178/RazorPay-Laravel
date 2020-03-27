@@ -17,3 +17,4 @@ Route::get('/', function () {
 
 Route::post('/proceed', 'PaymentController@payment');
 Route::post('/payment_start', 'PaymentController@paymentStart');
+Route::post('/again', 'PaymentController@again');

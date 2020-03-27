@@ -15,8 +15,6 @@ class PaymentController extends Controller
         $transaction_id = "coronavirus-benefactory".time();
         $input = $request->all();
         $data = new Order();
-        // $response['ast'] = $request->name;
-        // return $response;
         $data->name = $input["fname"] . " " . $input['lname'];
         $data->email = $input["email"];
         $data->contact_number = $input["mobile"];
@@ -33,11 +31,11 @@ class PaymentController extends Controller
         $name = $input["fname"];
         $message_data = ["message" => $message, "email"=>$input["email"], "amount"=>$amount, "name"=> $name] ;
         // dd($message_data["amount"]);
-        Mail::send('corona_thank_you', ['title' => $title, 'message_data' => $message_data], function ($message) use($message_data)
-        {
-            $message->from('dipakrathod258@gmail.com', 'Team Benefactory');
-            $message->to($message_data['email'])->subject('#MaskAgainstCovid19 Donation');
-        });
+        // Mail::send('corona_thank_you', ['title' => $title, 'message_data' => $message_data], function ($message) use($message_data)
+        // {
+        //     $message->from('sunilthakur123chor@gmail.com', 'Team Benefactory');
+        //     $message->to($message_data['email'])->subject('#MaskAgainstCovid19 Donation');
+        // });
         // return redirect('/')->with("status", "success");
         if ($data->save()) {
             $response["status"]="success";
@@ -65,8 +63,8 @@ class PaymentController extends Controller
         $country = $input['country'];
         $amount = $input['amount'];
 
-        $keyId = 'rzp_test_N2JukPxHUXBj3n';
-        $keySecret = '1jgiGhOZOMzBxJuBQ8uxUXPh';
+        $keyId = 'rzp_live_MAFTNDKT4bWVvd';
+        $keySecret = 'ZblAtXBcW1GG68iGPqLUwmTP';
         $displayCurrency = 'INR';
         // Create the Razorpay Order
 
@@ -115,6 +113,10 @@ class PaymentController extends Controller
             "color"             => "#F37254"
             ],
             "order_id"          => $razorpayOrderId,
+
+            "order_id"          => $razorpayOrderId,
+            "redirect"          => "true",
+            "callback_url"      => "/again",
         ];
 
         if ($displayCurrency !== 'INR')
@@ -126,6 +128,15 @@ class PaymentController extends Controller
         $json = json_encode($data);
 
         return $json;
+
+    }
+
+    public function again (Request $request) {
+        echo $request->razorpay_payment_id . "<br>";
+        echo $request->razorpay_order_id . "<br>";
+        echo $request->razorpay_signature . "<br>";
+
+        return json_encode($request);
 
     }
 

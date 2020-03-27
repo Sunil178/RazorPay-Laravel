@@ -297,78 +297,11 @@
           $('#loading_icon').show();
         },
         success: function(obj) {
-            // console.log(obj)
-            options = JSON.parse(obj);
-            $('#order_id').val(options.order_id);
-            form_data.append("order_id", options.order_id)
-
-
-        options.handler = function (response){
-            $('#payment_id').val(response.razorpay_payment_id);
-            form_data.append("payment_id", response.razorpay_payment_id)
-            $('#signature').val(response.razorpay_signature);
-            form_data.append("signature", response.razorpay_signature)
-
-        fname = $('#first_name').val();
-        lname = $("#last_name").val();
-        email = $("#email").val();
-        mobile = $("#mobile").val();
-        pancard = $("#pancard").val();
-        country = $("#country").val();
-        amount = $("#amount").val();
-        order_id = $("#order_id").val();
-        payment_id = $("#payment_id").val();
-        signature = $("#signature").val();
-
-        form_data = {"fname": fname, "lname": lname, "email": email, "mobile": mobile, "pancard": pancard, "country": country, "amount": amount, "order_id": order_id, "payment_id": payment_id, "signature": signature};
-console.log(form_data);
-      $.ajax({
-        url: "/proceed/",
-        headers: {
-          'X-CSRF-TOKEN': "{{ csrf_token() }}"
-        },
-        method: 'POST',
-        type: 'JSON',
-        data: form_data,
-        // contentType: false,
-        // cache: false,
-        // processData: false,
-        beforeSend: function() {
-          $('#loading_icon').show();
-        },
-        success: function(obj) {
             console.log(obj)
-            alert("Successfuly made payment")
-        },
-        error: function(obj) {
-          alert("inner error")
-          $(".alert-danger").remove();
-          console.log(obj)
-          $.each(obj.responseJSON.errors, function(key, val) {
-            $('.errors').append("<ul style='list-style-type: none;'><li class='alert alert-danger'>" + val + "</li></ul>")
-          });
-        },
-        complete: function() {
-          $('#loading_icon').hide();
-        }
-      })
+            options = JSON.parse(obj);
 
-
-
-        };
         var rzp = new Razorpay(options);
         rzp.open();
-
-
-        console.log(form_data);
-
-
-
-
-
-
-
-
 
         },
         error: function(obj) {
