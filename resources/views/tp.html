@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <title>Fight against COVID – 19  | ACT NOW by TechnoMatrix</title>
+    <title>Fight against COVID – 19  | ACT NOW by Benefactory</title>
     <meta name="viewport" content="width=device-width">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -23,7 +23,9 @@
         <div class="section1">
             <div class="beneheader">
                 <div class="benelogo">
-                    <h1 style="color: white; font-family: Impact, Charcoal, sans-serif;">TechnoMatrix</h1>
+                    <a href="http://benefactory.live/">
+                        <img src="assets/Benefactory_White.png" height="80">
+                    </a>
                 </div>
                 <div>
 
@@ -245,10 +247,9 @@
         </div>
         <div class="section5">
             <div>
-                <h1 style="margin-left: -22px; color: black; font-family: Impact, Charcoal, sans-serif;">TechnoMatrix</h1>
-                <br>
+                <img style="margin-left: -22px;" class="sec4icons" src="assets/Benefactory_Black.png" height="90"><br>
                 <p class="head_desc" style="font-family: 'Inter', sans-serif">
-                    We at TechnoMatrix are on a mission to change the way the world responds to urgent crises. Our Act
+                    We at Benefactory are on a mission to change the way the world responds to urgent crises. Our Act
                     Now widget enables any online company to become a platform to collect donations for trusted
                     charities. In doing this, we channel a collective movement wherein multiple online companies and
                     millions of their customers can quickly make an impact when a crisis arises.
@@ -264,7 +265,7 @@
             </div>
             <br>
             <div>
-                <span>© Copyright TechnoMatrix 2020</span>
+                <span>© Copyright Benefactory 2020</span>
             </div>
 
         </div>
@@ -296,11 +297,78 @@
           $('#loading_icon').show();
         },
         success: function(obj) {
-            console.log(obj)
+            // console.log(obj)
             options = JSON.parse(obj);
+            $('#order_id').val(options.order_id);
+            form_data.append("order_id", options.order_id)
 
+
+        options.handler = function (response){
+            $('#payment_id').val(response.razorpay_payment_id);
+            form_data.append("payment_id", response.razorpay_payment_id)
+            $('#signature').val(response.razorpay_signature);
+            form_data.append("signature", response.razorpay_signature)
+
+        fname = $('#first_name').val();
+        lname = $("#last_name").val();
+        email = $("#email").val();
+        mobile = $("#mobile").val();
+        pancard = $("#pancard").val();
+        country = $("#country").val();
+        amount = $("#amount").val();
+        order_id = $("#order_id").val();
+        payment_id = $("#payment_id").val();
+        signature = $("#signature").val();
+
+        form_data = {"fname": fname, "lname": lname, "email": email, "mobile": mobile, "pancard": pancard, "country": country, "amount": amount, "order_id": order_id, "payment_id": payment_id, "signature": signature};
+console.log(form_data);
+      $.ajax({
+        url: "/proceed/",
+        headers: {
+          'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        },
+        method: 'POST',
+        type: 'JSON',
+        data: form_data,
+        // contentType: false,
+        // cache: false,
+        // processData: false,
+        beforeSend: function() {
+          $('#loading_icon').show();
+        },
+        success: function(obj) {
+            console.log(obj)
+            alert("Successfuly made payment")
+        },
+        error: function(obj) {
+          alert("inner error")
+          $(".alert-danger").remove();
+          console.log(obj)
+          $.each(obj.responseJSON.errors, function(key, val) {
+            $('.errors').append("<ul style='list-style-type: none;'><li class='alert alert-danger'>" + val + "</li></ul>")
+          });
+        },
+        complete: function() {
+          $('#loading_icon').hide();
+        }
+      })
+
+
+
+        };
         var rzp = new Razorpay(options);
         rzp.open();
+
+
+        console.log(form_data);
+
+
+
+
+
+
+
+
 
         },
         error: function(obj) {

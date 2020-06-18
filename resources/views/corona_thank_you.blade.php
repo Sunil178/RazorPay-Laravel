@@ -73,7 +73,7 @@
 		<p>Once again, thank you for your support!</p>
 
 		Cheers,<br>
-		Team Benefactory
+		Team TechnoMatrix
 		<br><br>
 		<!-- <button style="background-color: #F47D47; " type="button" class="btn btn-success">SHARE WITH YOUR FRIENDS</button> -->
 		<a href="https://www.benefactory.live/" style="background-color: #F47D47;    display: inline-block;
@@ -123,7 +123,7 @@
  -->	       <p>
 	       	<span><a href="https://www.benefactory.live/privacy-policy">Privacy Policy</a></span>&nbsp;
 	       	<span><a href="https://www.benefactory.live/terms-conditions">Terms & Conditions</a></span>
-	       	<span>&copy;&nbsp;Benefactory 2019</span>
+	       	<span>&copy;&nbsp;TechnoMatrix 2020</span>
 	       </p>
 	       <!-- <span>&copy;&nbsp;Benefactory 2019</span> -->
 	    </div>

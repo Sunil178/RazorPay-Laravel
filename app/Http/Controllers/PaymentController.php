@@ -112,7 +112,6 @@ class PaymentController extends Controller
             "theme"             => [
             "color"             => "#F37254"
             ],
-            "order_id"          => $razorpayOrderId,
 
             "order_id"          => $razorpayOrderId,
             "redirect"          => "true",
