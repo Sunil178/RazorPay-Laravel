@@ -30,14 +30,14 @@ class PaymentController extends Controller
         // $email = $req->email;
         $name = $input["fname"];
         $message_data = ["message" => $message, "email"=>$input["email"], "amount"=>$amount, "name"=> $name] ;
-        // dd($message_data["amount"]);
-        // Mail::send('corona_thank_you', ['title' => $title, 'message_data' => $message_data], function ($message) use($message_data)
-        // {
-        //     $message->from('sunilthakur123chor@gmail.com', 'Team TechnoMatrix');
-        //     $message->to($message_data['email'])->subject('#MaskAgainstCovid19 Donation');
-        // });
-        // return redirect('/')->with("status", "success");
         if ($data->save()) {
+        dd($message_data["amount"]);
+        Mail::send('corona_thank_you', ['title' => $title, 'message_data' => $message_data], function ($message) use($message_data)
+        {
+            $message->from('sunilthakur123chor@gmail.com', 'Team TechnoMatrix');
+            $message->to($message_data['email'])->subject('#MaskAgainstCovid19 Donation');
+        });
+        return redirect('/')->with("status", "success");
             $response["status"]="success";
             // $response["data"] = IndiaFloodsContribution::orderBy('amount', 'DESC')->get();
             $response["total_amount"] = Order::sum('amount');
@@ -66,6 +66,7 @@ class PaymentController extends Controller
         $keyId = env('RAZORPAY_KEY');
         $keySecret = env('RAZORPAY_SECRET');
         $displayCurrency = 'INR';
+
         // Create the Razorpay Order
 
 
@@ -114,8 +115,8 @@ class PaymentController extends Controller
             ],
 
             "order_id"          => $razorpayOrderId,
-            "redirect"          => "true",
-            "callback_url"      => "/again",
+            // "redirect"          => "true",
+            // "callback_url"      => "/again",
         ];
 
         if ($displayCurrency !== 'INR')

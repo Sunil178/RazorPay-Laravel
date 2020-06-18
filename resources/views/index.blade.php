@@ -16,6 +16,8 @@
     <link href="https://fonts.googleapis.com/css?family=Space+Mono:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 </head>
 <body>
 
@@ -276,7 +278,6 @@
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 <script type="text/javascript">
-    
 
     $("#donate_form").on("submit", function(e) {
         form_data = new FormData(this);
@@ -298,7 +299,15 @@
         success: function(obj) {
             console.log(obj)
             options = JSON.parse(obj);
-
+        options.handler = function (response){
+            if (response.razorpay_payment_id) {
+                swal(
+                    'Payment Done',
+                    'Payment has been done successfully',
+                    'success'
+                    );
+            }
+        };
         var rzp = new Razorpay(options);
         rzp.open();
 
@@ -306,8 +315,8 @@
         error: function(obj) {
           alert("outer error")
           $(".alert-danger").remove();
-          console.log(obj.responseJSON.errors)
-          $.each(obj.responseJSON.errors, function(key, val) {
+          console.log(obj)
+          $.each(obj.responseJSON, function(key, val) {
             $('.errors').append("<ul style='list-style-type: none;'><li class='alert alert-danger'>" + val + "</li></ul>")
           });
         },
