@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="{{ url('/assets/css/benefactory_coronavirus.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('/assets/css/technomatrix_coronavirus.css') }}">
     <link rel="icon" href="assets/ACT_NOW_Logo_(Med).png" type="image/png" sizes="16x16">
     <meta name="theme-color" content="#BA3027" />
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&display=swap" rel="stylesheet">

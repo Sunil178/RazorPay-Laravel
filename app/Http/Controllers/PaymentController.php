@@ -12,7 +12,7 @@ class PaymentController extends Controller
 {
     public function payment(Request $request) {
         // dd($request->all());
-        $transaction_id = "coronavirus-benefactory".time();
+        $transaction_id = "coronavirus-technomatrix".time();
         $input = $request->all();
         $data = new Order();
         $data->name = $input["fname"] . " " . $input['lname'];
@@ -33,7 +33,7 @@ class PaymentController extends Controller
         // dd($message_data["amount"]);
         // Mail::send('corona_thank_you', ['title' => $title, 'message_data' => $message_data], function ($message) use($message_data)
         // {
-        //     $message->from('sunilthakur123chor@gmail.com', 'Team Benefactory');
+        //     $message->from('sunilthakur123chor@gmail.com', 'Team TechnoMatrix');
         //     $message->to($message_data['email'])->subject('#MaskAgainstCovid19 Donation');
         // });
         // return redirect('/')->with("status", "success");
@@ -63,8 +63,8 @@ class PaymentController extends Controller
         $country = $input['country'];
         $amount = $input['amount'];
 
-        $keyId = 'rzp_live_MAFTNDKT4bWVvd';
-        $keySecret = 'ZblAtXBcW1GG68iGPqLUwmTP';
+        $keyId = env('RAZORPAY_KEY');
+        $keySecret = env('RAZORPAY_SECRET');
         $displayCurrency = 'INR';
         // Create the Razorpay Order
 

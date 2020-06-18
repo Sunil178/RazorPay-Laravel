@@ -57,10 +57,10 @@
 		<br>
 		<span>Hi&nbsp;{{$message_data["name"]}},</span>
 
-		<!-- <p>Thank you for donating though Benefactory!</p> -->
+		<!-- <p>Thank you for donating through TechnoMatrix!</p> -->
 		
 		
-		<p>Thank you for donating to the Coronavirus Relief campaign! Your donation of Rs. {{$message_data["amount"]}} through Benefactory was successful.</p>
+		<p>Thank you for donating to the Coronavirus Relief campaign! Your donation of Rs. {{$message_data["amount"]}} through TechnoMatrix was successful.</p>
 
 
 		<p>Your donation will help diminish the spread of COVID-19 especially among those who are on the front lines of this pandemic. It will sponsor 3-ply disposable surgical masks (ISO/CE Certified) to government hospitals in Mumbai.</p>
@@ -76,7 +76,7 @@
 		Team TechnoMatrix
 		<br><br>
 		<!-- <button style="background-color: #F47D47; " type="button" class="btn btn-success">SHARE WITH YOUR FRIENDS</button> -->
-		<a href="https://www.benefactory.live/" style="background-color: #F47D47;    display: inline-block;
+		<a href="https://www.technomatrix.live/" style="background-color: #F47D47;    display: inline-block;
 					   margin-bottom: 0;
 					   font-weight: 400;
 					   text-align: center;
@@ -98,7 +98,7 @@
 					   border-radius: 25px;
 					   color: #fff;
 					   text-decoration: none;
-   		" type="button" >VISIT BENEFACTORY.LIVE</a>
+   		" type="button" >VISIT TechnoMatrix.LIVE</a>
 		
 	</div>
 
@@ -109,23 +109,11 @@
 
 <center>
 	    <div class="container-fluid footer">
-<!-- 	        <ul class="list-inline footer_list" style="padding-left: 0; list-style: none; margin-left: -5px;display:block; padding-left: 0;list-style: none;margin-left: -5px;margin-top: 0; margin-bottom: 10px;">
-	     <li>
-	       <a href="https://www.benefactory.live/privacy-policy">Privacy Policy</a>
-	     </li>
-	     <li>
-	       |
-	     </li>
-	     <li>
-	       <a href="https://www.benefactory.live/terms-conditions">Terms & Conditions</a>
-	     </li>
-	       </ul>
- -->	       <p>
-	       	<span><a href="https://www.benefactory.live/privacy-policy">Privacy Policy</a></span>&nbsp;
-	       	<span><a href="https://www.benefactory.live/terms-conditions">Terms & Conditions</a></span>
+	       <p>
+	       	<span><a href="https://www.technomatrix.live/">Privacy Policy</a></span>&nbsp;
+	       	<span><a href="https://www.technomatrix.live/">Terms & Conditions</a></span>
 	       	<span>&copy;&nbsp;TechnoMatrix 2020</span>
 	       </p>
-	       <!-- <span>&copy;&nbsp;Benefactory 2019</span> -->
 	    </div>
 </center>
 
